@@ -791,7 +791,7 @@ function _runServer(argv) {
 
   console.log(chalk`Starting IdP server on port {cyan ${app.get('host')}:${app.get('port')}}...\n`);
 
-  httpServer.listen(app.get('port'), app.get('host'), function() {
+  return httpServer.listen(app.get('port'), app.get('host'), function() {
     const scheme          = argv.https ? 'https' : 'http',
           {address, port} = httpServer.address(),
           hostname        = WILDCARD_ADDRESSES.includes(address) ? os.hostname() : 'localhost',
@@ -817,7 +817,6 @@ function _runServer(argv) {
         {cyan ${baseUrl}}
     `));
   });
-  return httpServer
 }
 
 function runServer(options) {
